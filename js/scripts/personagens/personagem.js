@@ -7,6 +7,7 @@ class Personagem extends Animacao {
         this.velocidadePulo = 0;
         this.gravidade = 1.9;
         this.quantosPulos = 2;
+        this.invencivel = false;
     }
 
     pula(){
@@ -19,7 +20,15 @@ class Personagem extends Animacao {
         if(this.y >= this.yInicial) this.y = this.yInicial;
     }
 
+    invuneravel(){
+        this.invencivel = true;
+        setTimeout(() => this.invencivel = false, 1000);
+    }
+
     colisao(inimigo){
+        if(this.invencivel){
+            return false;
+        }
         const precicao = .5369;
         noFill();
         rect(this.x, this.y+39, this.largura * precicao, this.altura)
